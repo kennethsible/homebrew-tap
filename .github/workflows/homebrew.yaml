@@ -1,0 +1,30 @@
+name: Publish Homebrew Cask
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  bump-cask:
+    runs-on: ubuntu-latest
+    container:
+      image: homebrew/brew
+    steps:
+      - name: Bump Cask via Homebrew CLI
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
+        run: |
+          brew bump-cask-pr \
+            --version "${GITHUB_REF_NAME#v}" \
+            --no-browse \
+            --write-only \
+            kennethsible/tap/jellyfin-rpc
+      - name: Push Release to Tap
+        env:
+          GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
+        run: |
+          cd "$(brew --repository kennethsible/tap)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "bumped jellyfin-rpc to ${GITHUB_REF_NAME}"
+          git push origin main
