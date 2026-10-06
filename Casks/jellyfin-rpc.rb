@@ -1,14 +1,14 @@
 cask "jellyfin-rpc" do
   arch arm: "arm64", intel: "amd64"
 
-  version "1.11.0"
+  version "1.12.0"
 
   on_arm do
-    sha256 "f7a23157641cdcf8edf8aff02505be7506e1aafdd57d473e20a9764a35be42a4"
+    sha256 "51f0594535c170c468a906e3fc23af8d336734fbed0aa4f0be3ff0cb0ea83a09"
     url "https://github.com/kennethsible/jellyfin-rpc/releases/download/v#{version}/jellyfin-rpc-#{version}-macos-arm64.zip"
   end
   on_intel do
-    sha256 "e4be9cb13610fa34f016c19de617445b4c0edc81d1f0dd54ac74a516ed97e5dc"
+    sha256 "3f1a461da2a5ffa6a3f62582d6feb129b19d4f53728ea2ac5618179547683fb4"
     url "https://github.com/kennethsible/jellyfin-rpc/releases/download/v#{version}/jellyfin-rpc-#{version}-macos-amd64.zip"
   end
 
